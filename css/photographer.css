@@ -3,6 +3,7 @@
 }
 
 .photograph-header {
+    display: flex;
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
@@ -73,4 +74,21 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+.photograph-header article img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.testdiv {
+    width: 100px;
+    height: 100px;
+}
+
+.testdiv2 {
+    width: 100px;
+    height: 100px;
 }

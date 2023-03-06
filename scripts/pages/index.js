@@ -1,4 +1,6 @@
-async function getPhotographers() {
+import { photographerFactory } from "../factories/photographer.js";
+
+export async function getPhotographers() {
 
     const result = await fetch("../../data/photographers.json");
     const photographers = await result.json();
@@ -19,7 +21,7 @@ async function displayData(photographers) {
 async function init() {
     // Récupère les datas des photographes
     const photographers = await getPhotographers();
-    console.log(photographers);
+
     displayData(photographers);
 };
 
