@@ -1,5 +1,5 @@
 import { photographerFactory } from "../factories/photographer.js";
-import { mediaFactory } from "../factories/media.js";
+import { mediaFactory } from "../factories/mediaFactory.js";
 import { getPhotographers } from "./index.js";
 
 async function getPhotographerById(id) {
@@ -14,7 +14,7 @@ async function getPhotographerById(id) {
       return false;
 }
 
-async function getMediaById(id) {
+async function getMediaById(id,type) {
     try {
         const result = await fetch("../../data/photographers.json");
     const resultJson = await result.json();
@@ -23,7 +23,9 @@ async function getMediaById(id) {
 
     for (let i = 0; i < medias.length; i++) {
         if(medias[i].photographerId === id){
-            mediasTab.push(medias[i]);
+            if(medias[i].hasOwnProperty(type)) {
+                mediasTab.push(medias[i]);
+            }
         }
       }
       return mediasTab;
@@ -46,11 +48,11 @@ async function displayData(photographer) {
 
 };
 
-async function displayMedia(medias) {
+async function displayMedia(medias,type) {
     const mediaDisplay = document.querySelector(".photograph-media_display");
     
     medias.forEach((media) => {
-        const mediaModel = mediaFactory(media);
+        const mediaModel = mediaFactory(media,type);
         console.log(mediaModel);
         const mediaDOM = mediaModel.getMediaDOM();
         mediaDisplay.appendChild(mediaDOM);
@@ -66,9 +68,10 @@ async function init() {
     console.log(photographer);
     displayData(photographer);
     
-    const medias = await getMediaById(id);
-    console.log(medias);
-    displayMedia(medias);
+    const mediasPicture = await getMediaById(id,"image");
+    const mediasVideo = await getMediaById(id,"video");
+    displayMedia(mediasPicture, "image");
+    displayMedia(mediasVideo, "video");
 };
 
 init();

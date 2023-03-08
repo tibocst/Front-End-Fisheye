@@ -1,4 +1,6 @@
-export function mediaFactory(data) {
+export function mediaPicture(data) {
+    // en gros la il faut gerer le constructeur quand c'est une image ou une vidéo
+    
     const { id, photographerId, title, image, likes, date, price } = data;
 
     const picture = `assets/sample photos/${image}`;
