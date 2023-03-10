@@ -11,8 +11,4 @@ export function mediaFactory(data,type) {
     } else {
         throw "Unknown type format : image ou video accepté"
     }
-
-
-
-
 }
