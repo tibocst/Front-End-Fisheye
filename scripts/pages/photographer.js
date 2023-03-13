@@ -53,7 +53,6 @@ async function displayMedia(medias,type) {
     
     medias.forEach((media) => {
         const mediaModel = mediaFactory(media,type);
-        console.log(mediaModel);
         const mediaDOM = mediaModel.getMediaDOM();
         mediaDisplay.appendChild(mediaDOM);
     });
@@ -68,13 +67,25 @@ async function displayPrice(photographer){
     encartPrice.appendChild(userPriceDOM);
 }
 
+function triButton() {
+    const triButtonPopularite = document.querySelector(".photograph-media_tri_button_popularite");
+    const triButtonDate = document.querySelector(".photograph-media_tri_button_date");
+    const triButtonTitre = document.querySelector(".photograph-media_tri_button_titre");
+    const triButtonChevronUp = document.querySelector(".fa-chevron-up");
+    const triButtonChevronDown = document.querySelector(".fa-chevron-down");
+    const triButton = document.querySelector(".photograph-media_tri_button");
+
+    
+    triButtonChevronUp.style.opacity = "1";
+    triButtonChevronDown.style.opacity = "0";
+}   
+
 async function init() {
     
     let params = (new URL(document.location)).searchParams;
     let id = parseInt(params.get('id'));
 
     const photographer = await getPhotographerById(id);
-    console.log(photographer);
     displayData(photographer);
 
     displayPrice(photographer);
@@ -83,6 +94,9 @@ async function init() {
     const mediasVideo = await getMediaById(id,"video");
     displayMedia(mediasPicture, "image");
     displayMedia(mediasVideo, "video");
+
+    const eventListenerTriButton = document.querySelector(".photograph-media_tri_button");
+    eventListenerTriButton.addEventListener("click", triButton, false);
 };
 
 init();

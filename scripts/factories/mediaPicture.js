@@ -38,10 +38,18 @@ export function mediaPicture(data) {
 
     function getMediaLikeDOM() {
         
+        const divlikes = document.createElement( 'div' );
         const plikes = document.createElement( 'p' );
         plikes.textContent = likes;
+
+        const imglikes = document.createElement( 'img' );
+        imglikes.src = "./assets/icons/heart-solid.svg";
+        imglikes.alt = "coeur";
+
+        divlikes.appendChild(plikes);
+        divlikes.appendChild(imglikes);
         
-        return (plikes);
+        return (divlikes);
     }
 
 

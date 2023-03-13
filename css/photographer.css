@@ -111,6 +111,60 @@ form input {
 .photograph-media_tri {
     display: flex;
     gap: 20px;
+    position: relative;
+}
+
+.photograph-media_tri_button {
+    display: flex;
+    flex-direction: column ;
+    font-size: 1em;
+    color: white;
+    width: 120px;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: center;
+    position: absolute;
+    padding: 0px 10px;
+    left: 80px;
+    top: 10px;
+}
+
+.fa-chevron-up {
+    opacity: 0;
+    position: absolute;
+    right: 13px;
+    top: 16px;
+    font-size: 0.7em;
+}
+.fa-chevron-down {
+    position: absolute;
+    right: 13px;
+    top: 16px;
+    font-size: 0.7em;
+}
+
+.photograph-media_tri_button > div {
+    padding: 10px;
+}
+
+.photograph-media_tri_button_popularite {
+    display: flex;
+    /* border-bottom: 1px solid #FAFAFA; */
+}
+
+.photograph-media_tri_button_date {
+    display: none;
+    border-bottom: 1px solid #FAFAFA;
+}
+
+.photograph-media_tri_button_titre {
+    display: none;
+    padding-bottom: 11px;
+}
+
+.photograph-media_tri_button > div > p {
+    margin: 0;
 }
 
 .photograph-media_display {
@@ -142,8 +196,21 @@ form input {
     margin: 0;
 } 
 
-.photograph-media_display > div > div > p {
+.photograph-media_display > div > div > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.photograph-media_display > div > div > div > p {
     margin: 0;
+}
+
+.photograph-media_display > div > div > div > img {
+    width: 15px;
+    height: 15px;
+    filter: invert(13%) sepia(70%) saturate(3146%) hue-rotate(352deg) brightness(100%) contrast(86%);
 } 
 
 .photograph-media_display video {
@@ -164,3 +231,5 @@ form input {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
+
+
