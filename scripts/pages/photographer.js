@@ -14,7 +14,7 @@ async function getPhotographerById(id) {
       return false;
 }
 
-async function getMediaById(id,type) {
+export async function getMediaById(id,type) {
     try {
         const result = await fetch("../../data/photographers.json");
     const resultJson = await result.json();
@@ -67,6 +67,20 @@ async function displayPrice(photographer){
     encartPrice.appendChild(userPriceDOM);
 }
 
+async function displayAllLike(photographer){
+    const encartAllLike = document.querySelector(".photograph-encart_likes");
+
+    const photographerModel = photographerFactory(photographer);
+    const userPriceDOM = await photographerModel.getUserAllLikeDOM();
+  
+    const imglikes = document.createElement( 'img' );
+    imglikes.src = "./assets/icons/heart-solid.svg";
+    imglikes.alt = "coeur";
+
+    encartAllLike.appendChild(userPriceDOM);
+    encartAllLike.appendChild(imglikes);
+}
+
 function triButton() {
     const triButtonPopularite = document.querySelector(".photograph-media_tri_button_popularite");
     const triButtonDate = document.querySelector(".photograph-media_tri_button_date");
@@ -80,6 +94,34 @@ function triButton() {
     triButtonChevronDown.style.opacity = "0";
 }   
 
+function addLike(element) {
+    
+    if(element.currentTarget.classList.contains("liked")) {
+        element.currentTarget.classList.remove("liked");
+        const p = element.currentTarget.querySelector("p");
+        let pNumber = parseInt(p.innerHTML);
+        pNumber = pNumber - 1;
+        p.innerHTML = pNumber.toString();
+
+        const pEncartLike = document.querySelector(".photograph-encart_likes > p");
+        let pNumberEncartLike = parseInt(pEncartLike.innerHTML);
+        pNumberEncartLike = pNumberEncartLike - 1;
+        pEncartLike.innerHTML = pNumberEncartLike.toString();
+    }
+    else {
+        const p = element.currentTarget.querySelector("p");
+        let pNumber = parseInt(p.innerHTML);
+        pNumber = pNumber + 1;
+        p.innerHTML = pNumber.toString();
+        element.currentTarget.classList.add("liked");
+
+        const pEncartLike = document.querySelector(".photograph-encart_likes > p");
+        let pNumberEncartLike = parseInt(pEncartLike.innerHTML);
+        pNumberEncartLike = pNumberEncartLike + 1;
+        pEncartLike.innerHTML = pNumberEncartLike.toString();
+    }
+}
+
 async function init() {
     
     let params = (new URL(document.location)).searchParams;
@@ -89,6 +131,7 @@ async function init() {
     displayData(photographer);
 
     displayPrice(photographer);
+    displayAllLike(photographer);
     
     const mediasPicture = await getMediaById(id,"image");
     const mediasVideo = await getMediaById(id,"video");
@@ -97,6 +140,15 @@ async function init() {
 
     const eventListenerTriButton = document.querySelector(".photograph-media_tri_button");
     eventListenerTriButton.addEventListener("click", triButton, false);
+
+    const eventListenerAddLike = document.querySelectorAll(".photograph-media_display_addLike");
+    
+    console.log(eventListenerAddLike)
+
+    eventListenerAddLike.forEach((element) => {
+        console.log(element)
+        element.addEventListener("click", addLike);
+    });
 };
 
 init();

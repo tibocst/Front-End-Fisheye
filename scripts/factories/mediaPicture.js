@@ -39,6 +39,8 @@ export function mediaPicture(data) {
     function getMediaLikeDOM() {
         
         const divlikes = document.createElement( 'div' );
+        divlikes.className = "photograph-media_display_addLike";
+
         const plikes = document.createElement( 'p' );
         plikes.textContent = likes;
 

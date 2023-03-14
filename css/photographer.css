@@ -200,6 +200,7 @@ form input {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     gap: 5px;
 }
 
@@ -210,6 +211,7 @@ form input {
 .photograph-media_display > div > div > div > img {
     width: 15px;
     height: 15px;
+    cursor:pointer; 
     filter: invert(13%) sepia(70%) saturate(3146%) hue-rotate(352deg) brightness(100%) contrast(86%);
 } 
 
@@ -227,9 +229,35 @@ form input {
     background-color: #D3573C;
     width: 500px;
     height: 40px;
-    display: block;
+    display: flex;
+    justify-content: space-around;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
+.photograph-encart_likes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.photograph-encart_likes > p {
+    margin: 0;
+}
+
+.photograph-encart_likes > img {
+    width: 15px;
+}
+
+.photograph-encart_price {
+    display: flex;
+    align-items: center;
+}
+
+/* Quand une photo est liké, ces propriétés s'appliquent */
+
+.liked > p {
+    font-weight: bold;
+    color: #901C1C;
+}
 

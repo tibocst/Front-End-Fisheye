@@ -1,3 +1,5 @@
+import { getMediaById } from "../pages/photographer.js";
+
 export function photographerFactory(data) {
     const { name, id, city, country, tagline, price, portrait } = data;
 
@@ -67,7 +69,28 @@ export function photographerFactory(data) {
         return (pPrice);
     }
 
+    async function getUserAllLikeDOM() {
+
+        const images = await getMediaById(id,"image");
+        console.log(images);
+        const videos = await getMediaById(id,"video");
+        let likeTotal = 0;
+        
+        images.forEach((image) => {
+            likeTotal = image.likes + likeTotal;
+        });
+
+        videos.forEach((video) => {
+            likeTotal = video.likes + likeTotal;
+        });
+
+        const plikes = document.createElement( 'p' );
+        plikes.textContent = likeTotal;
+
+        return plikes;
+    }
+
 
     return { name, id, city, country, tagline, price, portrait, getUserCardDOM, getUserPictureDOM
-  , getUserInfoDOM, getUserPriceDOM }
+  , getUserInfoDOM, getUserPriceDOM, getUserAllLikeDOM }
 }
