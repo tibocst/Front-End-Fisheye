@@ -81,18 +81,97 @@ async function displayAllLike(photographer){
     encartAllLike.appendChild(imglikes);
 }
 
-function triButton() {
-    const triButtonPopularite = document.querySelector(".photograph-media_tri_button_popularite");
-    const triButtonDate = document.querySelector(".photograph-media_tri_button_date");
-    const triButtonTitre = document.querySelector(".photograph-media_tri_button_titre");
-    const triButtonChevronUp = document.querySelector(".fa-chevron-up");
-    const triButtonChevronDown = document.querySelector(".fa-chevron-down");
-    const triButton = document.querySelector(".photograph-media_tri_button");
+function triButton(e) {
 
+    const mediaDisplay = document.querySelector(".photograph-media_display");
+    mediaDisplay.innerHTML = "";
+
+    const selectedValue = e.target.value;
+
+    switch (selectedValue) {
+        case "popular":
+            triButtonByPopularite();
+        break;
+        
+        case "date":
+            triButtonByDate();
+        break;
+
+        case "title":
+            triButtonByTitre();
+        break;
+
+        defaut: break;
+  }
+}
+
+async function triButtonByPopularite() {
+
+    const id = getUserId();
+
+    const images = await getMediaById(id,"image");
+    const videos = await getMediaById(id,"video");
+    const medias = images.concat(videos);
+
+    medias.sort(function(a,b){return a.likes - b.likes});
+
+    displayTriButton(medias);
+}
+
+async function triButtonByDate() {
+
+    const id = getUserId();
+
+    const images = await getMediaById(id,"image");
+    const videos = await getMediaById(id,"video");
+    const medias = images.concat(videos);
+
+    medias.sort(function(a,b){return a.date - b.date});
     
-    triButtonChevronUp.style.opacity = "1";
-    triButtonChevronDown.style.opacity = "0";
-}   
+    displayTriButton(medias);
+}
+
+async function triButtonByTitre() {
+
+    const id = getUserId();
+
+    const images = await getMediaById(id,"image");
+    const videos = await getMediaById(id,"video");
+    const medias = images.concat(videos);
+
+
+    medias.sort(function (a, b) {
+        if (a.title < b.title) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
+      });
+      
+      displayTriButton(medias);
+}
+
+function displayTriButton(medias) {
+    
+    const videos = [];
+    medias.forEach((media,index) => {
+        if(media.hasOwnProperty("video")) {
+            videos.push(media);
+            medias.splice(index, 1);
+        }
+    });
+
+    displayMedia(medias,"image");
+    displayMedia(videos,"video");
+
+    const eventListenerAddLike = document.querySelectorAll(".photograph-media_display_addLike");
+    
+    eventListenerAddLike.forEach((element) => {
+        element.addEventListener("click", addLike);
+    });
+}
 
 function addLike(element) {
     
@@ -122,10 +201,17 @@ function addLike(element) {
     }
 }
 
-async function init() {
+function getUserId() {
     
     let params = (new URL(document.location)).searchParams;
     let id = parseInt(params.get('id'));
+
+    return id;
+}
+
+async function init() {
+    
+    const id = getUserId();
 
     const photographer = await getPhotographerById(id);
     displayData(photographer);
@@ -138,15 +224,12 @@ async function init() {
     displayMedia(mediasPicture, "image");
     displayMedia(mediasVideo, "video");
 
-    const eventListenerTriButton = document.querySelector(".photograph-media_tri_button");
-    eventListenerTriButton.addEventListener("click", triButton, false);
+    const elementSelect = document.getElementById("select").addEventListener("change", triButton, false);
 
     const eventListenerAddLike = document.querySelectorAll(".photograph-media_display_addLike");
-    
-    console.log(eventListenerAddLike)
 
+    //ajouter ca mais après le tri media sinon les likes ne vont pas proc
     eventListenerAddLike.forEach((element) => {
-        console.log(element)
         element.addEventListener("click", addLike);
     });
 };

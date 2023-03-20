@@ -76,6 +76,8 @@ form input {
     border-radius: 5px;
 }
 
+/* header avec infos du photographe */
+
 .photograph-header {
     display: flex;
     justify-content: space-between;
@@ -101,12 +103,16 @@ form input {
     border-radius: 50%;
 }
 
+/* pour les photos/videos en général */
+
 .photograph-media {
     margin: 40px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
+
+/* css lié au bouton de tri */
 
 .photograph-media_tri {
     display: flex;
@@ -122,50 +128,17 @@ form input {
     width: 120px;
     background-color: #901C1C;
     border-radius: 5px;
+    border: inherit;
     cursor: pointer;
     align-self: center;
-    position: absolute;
-    padding: 0px 10px;
-    left: 80px;
-    top: 10px;
+    padding: 10px 10px;
 }
 
-.fa-chevron-up {
-    opacity: 0;
-    position: absolute;
-    right: 13px;
-    top: 16px;
-    font-size: 0.7em;
-}
-.fa-chevron-down {
-    position: absolute;
-    right: 13px;
-    top: 16px;
-    font-size: 0.7em;
-}
-
-.photograph-media_tri_button > div {
-    padding: 10px;
-}
-
-.photograph-media_tri_button_popularite {
+.tri-button_visible {
     display: flex;
-    /* border-bottom: 1px solid #FAFAFA; */
 }
 
-.photograph-media_tri_button_date {
-    display: none;
-    border-bottom: 1px solid #FAFAFA;
-}
-
-.photograph-media_tri_button_titre {
-    display: none;
-    padding-bottom: 11px;
-}
-
-.photograph-media_tri_button > div > p {
-    margin: 0;
-}
+/* css des photos/vidéos et le texte en lien */
 
 .photograph-media_display {
     display: flex;
@@ -196,7 +169,7 @@ form input {
     margin: 0;
 } 
 
-.photograph-media_display > div > div > div{
+.photograph-media_display > div > div > div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -222,6 +195,8 @@ form input {
     border-radius: 10px;
 }
 
+/* css de l'encart en bas à droite */
+
 .photograph-encart {
     position: fixed;
     right: 20px;
@@ -234,6 +209,8 @@ form input {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
+
+/* encart like totaux */
 
 .photograph-encart_likes {
     display: flex;
@@ -249,15 +226,19 @@ form input {
     width: 15px;
 }
 
-.photograph-encart_price {
-    display: flex;
-    align-items: center;
-}
-
 /* Quand une photo est liké, ces propriétés s'appliquent */
 
 .liked > p {
     font-weight: bold;
     color: #901C1C;
 }
+
+/* encart du prix du photographe par jour */
+
+.photograph-encart_price {
+    display: flex;
+    align-items: center;
+}
+
+
 
