@@ -37,14 +37,17 @@ export async function getMediaById(id,type) {
 
 async function displayData(photographer) {
     const photographersSection = document.querySelector(".photograph-header");
+    const modalForm = document.querySelector(".modal header div");
     
     const photographerModel = photographerFactory(photographer);
     
     const userPictureDOM = photographerModel.getUserPictureDOM();
     const userInfoDOM = photographerModel.getUserInfoDOM();
+    const nameInfoDOM = photographerModel.getUserNameDOM();
 
     photographersSection.appendChild(userPictureDOM);
     photographersSection.prepend(userInfoDOM);
+    modalForm.appendChild(nameInfoDOM);
 
 };
 
@@ -228,7 +231,6 @@ async function init() {
 
     const eventListenerAddLike = document.querySelectorAll(".photograph-media_display_addLike");
 
-    //ajouter ca mais après le tri media sinon les likes ne vont pas proc
     eventListenerAddLike.forEach((element) => {
         element.addEventListener("click", addLike);
     });

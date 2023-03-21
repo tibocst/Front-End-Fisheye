@@ -12,8 +12,7 @@ export function photographerFactory(data) {
         a.href = "photographer.html?id=" + id;
         const img = getUserPictureDOM();
         
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
+        const h2 = getUserNameDOM();
         const h3 = document.createElement( 'h3' );
         h3.textContent = city + ", " + country;
         const pTagline = document.createElement( 'p' );
@@ -29,6 +28,15 @@ export function photographerFactory(data) {
         article.appendChild(pPrice);
 
         return (article);
+    }
+
+    function getUserNameDOM() {
+        // ne pas oublier les alt et aria-label
+        
+        const h2 = document.createElement( 'h2' );
+        h2.textContent = name;
+
+        return (h2);
     }
 
     function getUserPictureDOM() {
@@ -92,5 +100,5 @@ export function photographerFactory(data) {
 
 
     return { name, id, city, country, tagline, price, portrait, getUserCardDOM, getUserPictureDOM
-  , getUserInfoDOM, getUserPriceDOM, getUserAllLikeDOM }
+  , getUserInfoDOM, getUserPriceDOM, getUserAllLikeDOM, getUserNameDOM }
 }

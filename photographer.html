@@ -49,15 +49,24 @@
   <div id="contact_modal">
     <div class="modal">
       <header>
-        <h2>Contactez-moi</h2>
-        <img src="./assets/icons/close.svg" onclick="closeModal()" />
-      </header>
-      <form>
         <div>
-          <label>Prénom</label>
-          <input />
+          <h2>Contactez-moi</h2>
         </div>
-        <button class="contact_button">Envoyer</button>
+        <img src="./assets/icons/close.svg" onclick="closeModal()"/>
+      </header>
+      <form id="contactForm" onsubmit="return submitedContactForm(event)">
+        <div>
+          <label for="first">Prénom</label>
+          <input class="" type="text" name="first"/>
+          <label for="second">Nom</label>
+          <input class="" type="text" name="second"/>
+          <label for="email">Email</label>
+          <input class="" type="email" name="email"/>
+          <label for="msg">Votre message</label>
+          <textarea name="msg"></textarea>
+          </textarea>
+        </div>
+        <input class="contact_button" type="submit" class="button" value="Envoyer"/>
       </form>
     </div>
   </div>
