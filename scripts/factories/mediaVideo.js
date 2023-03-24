@@ -33,6 +33,7 @@ export function mediaVideo(data) {
         const source = document.createElement( 'source' );
         
         video.setAttribute("controls","");
+        video.setAttribute("alt",title);
         source.setAttribute("src", videoPath);
         source.setAttribute("type", "video/mp4");
         video.appendChild(source);

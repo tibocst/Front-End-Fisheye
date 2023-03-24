@@ -6,6 +6,7 @@
   <script type="module" src="./scripts/factories/mediaFactory.js"></script>
   <script type="module" src="./scripts/pages/photographer.js"></script>
   <script src="./scripts/utils/contactForm.js"></script>
+  <script type="module" src="./scripts/utils/lightBoxModal.js"></script>
   <script src="https://kit.fontawesome.com/a268408eb4.js" crossorigin="anonymous"></script>
 
   <link href="./css/style.css" rel="stylesheet" type="text/css" />
@@ -52,7 +53,7 @@
         <div>
           <h2>Contactez-moi</h2>
         </div>
-        <img src="./assets/icons/close.svg" onclick="closeModal()"/>
+        <img src="./assets/icons/close.svg" onclick="closeModal()" class="contact_modal_img"/>
       </header>
       <form id="contactForm" onsubmit="return submitedContactForm(event)">
         <div>
@@ -68,6 +69,22 @@
         </div>
         <input class="contact_button" type="submit" class="button" value="Envoyer"/>
       </form>
+    </div>
+  </div>
+
+  <div class="lightbox_modal">
+    <div class="modal">
+      <div class="modal-media">
+        <img src="./assets/icons/close.svg" class="lightbox_modal_img"/>
+        <div class="left-chevron">
+          <img src="./assets/icons/chevron.svg"/>
+        </div>
+        <div class="lightbox-media"></div>
+        <div class="right-chevron">
+          <img src="./assets/icons/chevron.svg"/>
+        </div>
+      </div>
+      
     </div>
   </div>
 

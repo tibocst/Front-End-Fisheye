@@ -80,7 +80,6 @@ export function photographerFactory(data) {
     async function getUserAllLikeDOM() {
 
         const images = await getMediaById(id,"image");
-        console.log(images);
         const videos = await getMediaById(id,"video");
         let likeTotal = 0;
         

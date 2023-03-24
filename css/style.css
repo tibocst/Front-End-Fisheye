@@ -3,10 +3,9 @@
 body {
     font-family: "DM Sans", sans-serif;
     margin: auto;
-    width: 1400px;
+    max-width: 1400px;
 
 }
-
 
 header {
     display: flex;
