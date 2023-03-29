@@ -1,65 +1,73 @@
-export function mediaVideo(data) {
-    // en gros la il faut gerer le constructeur quand c'est une image ou une vidéo
-    
-    const { id, photographerId, title, video, likes, date, price } = data;
+export function mediaVideo (data) {
+  // en gros la il faut gerer le constructeur quand c'est une image ou une vidéo
 
-    const videoPath = `assets/sample photos/${video}`;
+  const { id, photographerId, title, video, likes, date, price } = data
 
-    function getMediaDOM() {
-        // ne pas oublier les alt et aria-label
-        const div = document.createElement( 'div' );
+  const videoPath = `assets/sample photos/${video}`
 
-        const video = getMediaVideoDOM();
+  function getMediaDOM () {
+    // ne pas oublier les alt et aria-label
+    const div = document.createElement('div')
 
-        const divTitre = document.createElement( 'div' );
-        
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = title;
-        
-        const pLikes = getMediaLikeDOM();
-        
-        div.appendChild(video);
-        div.appendChild(divTitre);
-        divTitre.appendChild(h2);
-        divTitre.appendChild(pLikes);
+    const video = getMediaVideoDOM()
 
-        return (div);
-    }
+    const divTitre = document.createElement('div')
 
-    function getMediaVideoDOM() {
-        // ne pas oublier les alt et aria-label
-        
-        const video = document.createElement( 'video' );
-        const source = document.createElement( 'source' );
-        
-        video.setAttribute("controls","");
-        video.setAttribute("alt",title);
-        source.setAttribute("src", videoPath);
-        source.setAttribute("type", "video/mp4");
-        video.appendChild(source);
+    const h2 = document.createElement('h2')
+    h2.textContent = title
 
-        return (video);
-    }
+    const pLikes = getMediaLikeDOM()
 
-    function getMediaLikeDOM() {
-        
-        const divlikes = document.createElement( 'div' );
-        divlikes.className = "photograph-media_display_addLike";
+    div.appendChild(video)
+    div.appendChild(divTitre)
+    divTitre.appendChild(h2)
+    divTitre.appendChild(pLikes)
 
-        const plikes = document.createElement( 'p' );
-        plikes.textContent = likes;
+    return (div)
+  }
 
-        const imglikes = document.createElement( 'img' );
-        imglikes.src = "./assets/icons/heart-solid.svg";
-        imglikes.alt = "coeur";
+  function getMediaVideoDOM () {
+    // ne pas oublier les alt et aria-label
 
-        divlikes.appendChild(plikes);
-        divlikes.appendChild(imglikes);
-        
-        return (divlikes);
-    }
+    const video = document.createElement('video')
+    const source = document.createElement('source')
 
+    video.setAttribute('controls', '')
+    video.setAttribute('alt', title + ', closeup view')
+    source.setAttribute('src', videoPath)
+    source.setAttribute('type', 'video/mp4')
+    video.appendChild(source)
 
-    return { id, photographerId, title, video, likes, date, price, 
-        getMediaDOM, getMediaVideoDOM, getMediaLikeDOM }
+    return (video)
+  }
+
+  function getMediaLikeDOM () {
+    const divlikes = document.createElement('div')
+    divlikes.className = 'photograph-media_display_addLike'
+
+    const plikes = document.createElement('p')
+    plikes.textContent = likes
+
+    const imglikes = document.createElement('img')
+    imglikes.src = './assets/icons/heart-solid.svg'
+    imglikes.alt = 'likes'
+
+    divlikes.appendChild(plikes)
+    divlikes.appendChild(imglikes)
+
+    return (divlikes)
+  }
+
+  return {
+    id,
+    photographerId,
+    title,
+    video,
+    likes,
+    date,
+    price,
+    getMediaDOM,
+    getMediaVideoDOM,
+    getMediaLikeDOM
+  }
 }

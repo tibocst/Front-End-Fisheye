@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
-  <script type="module" src="./scripts/factories/photographer.js"></script>
-  <script type="module" src="./scripts/factories/mediaFactory.js"></script>
   <script type="module" src="./scripts/pages/photographer.js"></script>
   <script src="./scripts/utils/contactForm.js"></script>
-  <script type="module" src="./scripts/utils/lightBoxModal.js"></script>
   <script src="https://kit.fontawesome.com/a268408eb4.js" crossorigin="anonymous"></script>
 
-  <link href="./css/style.css" rel="stylesheet" type="text/css" />
+  <link href="./css/style.css" rel="stylesheet" type="text/css">
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="./assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -18,22 +15,23 @@
 
 <body>
   <header>
-    <img src="assets/images/logo.png" class="logo" />
+    <a href="./index.html" aria-label="Lien vers la page d'accueil"><img src="./assets/images/logo.png" class="logo"
+        alt="Page d'accueil Fisheye"></a>
   </header>
   <main id="main">
     <div class="photograph-header">
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <button class="contact_button" onclick="displayModal()" aria-label="Contact Me">Contactez-moi</button>
     </div>
     <div class="photograph-media">
       <div class="photograph-media_tri">
         <p>Trier par</p>
 
-        <select id="select" class="photograph-media_tri_button">
-          <option value="popular">Popularité</option>
-          <option value="date">Date</option>
-          <option value="title">Titre</option>
+        <select id="select" class="photograph-media_tri_button" aria-label="Order By">
+          <option value="popular" aria-labelledby="select">Popularité</option>
+          <option value="date" aria-labelledby="select">Date</option>
+          <option value="title" aria-labelledby="select">Titre</option>
         </select>
-        </div>
+
       </div>
 
       <div class="photograph-media_display"></div>
@@ -53,38 +51,37 @@
         <div>
           <h2>Contactez-moi</h2>
         </div>
-        <img src="./assets/icons/close.svg" onclick="closeModal()" class="contact_modal_img"/>
+        <img src="./assets/icons/close.svg" onclick="closeModal()" class="contact_modal_img" alt="icone de croix" aria-label="Close Contact form">
       </header>
       <form id="contactForm" onsubmit="return submitedContactForm(event)">
         <div>
           <label for="first">Prénom</label>
-          <input class="" type="text" name="first"/>
+          <input class="" type="text" name="first" id="first" aria-label="First Name" aria-labelledby="first">
           <label for="second">Nom</label>
-          <input class="" type="text" name="second"/>
+          <input class="" type="text" name="second" id="second" aria-label="Last Name" aria-labelledby="second">
           <label for="email">Email</label>
-          <input class="" type="email" name="email"/>
+          <input class="" type="email" name="email" id="email" aria-label="Email" aria-labelledby="email">
           <label for="msg">Votre message</label>
-          <textarea name="msg"></textarea>
-          </textarea>
+          <textarea name="msg" id="msg" aria-label="Your message" aria-labelledby="msg"></textarea>
         </div>
-        <input class="contact_button" type="submit" class="button" value="Envoyer"/>
+        <input class="contact_button button" type="submit" value="Envoyer" aria-label="Send">
       </form>
     </div>
   </div>
 
   <div class="lightbox_modal">
     <div class="modal">
-      <div class="modal-media">
-        <img src="./assets/icons/close.svg" class="lightbox_modal_img"/>
-        <div class="left-chevron">
-          <img src="./assets/icons/chevron.svg"/>
+      <div class="modal-media" aria-label="image closeup view">
+        <img src="./assets/icons/close.svg" class="lightbox_modal_img" alt="icone de croix" aria-label="close dialog">
+        <div class="left-chevron" aria-label="previous image">
+          <img src="./assets/icons/chevron.svg" alt="chevron gauche" >
         </div>
         <div class="lightbox-media"></div>
-        <div class="right-chevron">
-          <img src="./assets/icons/chevron.svg"/>
+        <div class="right-chevron" aria-label="next image">
+          <img src="./assets/icons/chevron.svg" alt="chevron droit" >
         </div>
       </div>
-      
+
     </div>
   </div>
 

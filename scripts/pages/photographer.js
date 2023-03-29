@@ -1,246 +1,236 @@
-import { photographerFactory } from "../factories/photographer.js";
-import { mediaFactory } from "../factories/mediaFactory.js";
-import { getPhotographers } from "./index.js";
-import { displayLightBoxModal } from "../utils/lightBoxModal.js";
+import { photographerFactory } from '../factories/photographer.js'
+import { mediaFactory } from '../factories/mediaFactory.js'
+import { getPhotographers } from './index.js'
+import { displayLightBoxModal } from '../utils/lightBoxModal.js'
 
-async function getPhotographerById(id) {
+async function getPhotographerById (id) {
+  const photographers = await getPhotographers()
 
-    const photographers = await getPhotographers();
-
-    for (let i = 0; i < photographers.length; i++) {
-        if (photographers[i].id === id) {
-            return photographers[i];
-        }
+  for (let i = 0; i < photographers.length; i++) {
+    if (photographers[i].id === id) {
+      return photographers[i]
     }
-    return false;
+  }
+  return false
 }
 
-export async function getMediaById(id, type) {
-    try {
-        const result = await fetch("../../data/photographers.json");
-        const resultJson = await result.json();
-        const medias = resultJson.media;
-        const mediasTab = [];
+export async function getMediaById (id, type) {
+  try {
+    const result = await fetch('../../data/photographers.json')
+    const resultJson = await result.json()
+    const medias = resultJson.media
+    const mediasTab = []
 
-        for (let i = 0; i < medias.length; i++) {
-            if (medias[i].photographerId === id) {
-                if (medias[i].hasOwnProperty(type)) {
-                    mediasTab.push(medias[i]);
-                }
-            }
+    for (let i = 0; i < medias.length; i++) {
+      if (medias[i].photographerId === id) {
+        // eslint-disable-next-line no-prototype-builtins
+        if (medias[i].hasOwnProperty(type)) {
+          mediasTab.push(medias[i])
         }
-        return mediasTab;
+      }
     }
-    catch (error) {
-        console.log(error);
-    }
+    return mediasTab
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-async function displayData(photographer) {
-    const photographersSection = document.querySelector(".photograph-header");
-    const modalForm = document.querySelector(".modal header div");
+async function displayData (photographer) {
+  const photographersSection = document.querySelector('.photograph-header')
+  const modal = document.getElementById('contact_modal')
+  const modalFormH2 = document.querySelector('.modal header div > h2')
 
-    const photographerModel = photographerFactory(photographer);
+  const photographerModel = photographerFactory(photographer)
 
-    const userPictureDOM = photographerModel.getUserPictureDOM();
-    const userInfoDOM = photographerModel.getUserInfoDOM();
-    const nameInfoDOM = photographerModel.getUserNameDOM();
-    
-    photographersSection.appendChild(userPictureDOM);
-    photographersSection.prepend(userInfoDOM);
-    modalForm.appendChild(nameInfoDOM);
-
+  const userPictureDOM = photographerModel.getUserPictureDOM()
+  const userInfoDOM = photographerModel.getUserInfoDOM()
+  const nameInfoDOM = photographerModel.getUserNameDOM()
+  modal.ariaLabel = 'Contact me ' + nameInfoDOM.innerText
+  photographersSection.appendChild(userPictureDOM)
+  photographersSection.prepend(userInfoDOM)
+  modalFormH2.innerText = modalFormH2.innerText + ' ' + nameInfoDOM.innerHTML
 };
 
-async function displayMedia(medias, type) {
-    const mediaDisplay = document.querySelector(".photograph-media_display");
+async function displayMedia (medias, type) {
+  const mediaDisplay = document.querySelector('.photograph-media_display')
 
-    medias.forEach((media) => {
-        const mediaModel = mediaFactory(media, type);
-        const mediaDOM = mediaModel.getMediaDOM();
-        mediaDisplay.appendChild(mediaDOM);
-    });
+  medias.forEach((media) => {
+    const mediaModel = mediaFactory(media, type)
+    const mediaDOM = mediaModel.getMediaDOM()
+    mediaDisplay.appendChild(mediaDOM)
+  })
 
-    const eventListenerMediaDisplay = document.querySelectorAll(".photograph-media_display > div > img, .photograph-media_display > div > video");
+  const eventListenerMediaDisplay = document.querySelectorAll('.photograph-media_display > div > img, .photograph-media_display > div > video')
 
-    eventListenerMediaDisplay.forEach((element) => {
-        element.addEventListener("click", displayLightBoxModal);
-    });
+  eventListenerMediaDisplay.forEach((element) => {
+    element.addEventListener('click', displayLightBoxModal)
+  })
 }
 
-async function displayPrice(photographer) {
-    const encartPrice = document.querySelector(".photograph-encart_price");
+async function displayPrice (photographer) {
+  const encartPrice = document.querySelector('.photograph-encart_price')
 
-    const photographerModel = photographerFactory(photographer);
-    const userPriceDOM = photographerModel.getUserPriceDOM();
+  const photographerModel = photographerFactory(photographer)
+  const userPriceDOM = photographerModel.getUserPriceDOM()
 
-    encartPrice.appendChild(userPriceDOM);
+  encartPrice.appendChild(userPriceDOM)
 }
 
-async function displayAllLike(photographer) {
-    const encartAllLike = document.querySelector(".photograph-encart_likes");
+async function displayAllLike (photographer) {
+  const encartAllLike = document.querySelector('.photograph-encart_likes')
 
-    const photographerModel = photographerFactory(photographer);
-    const userPriceDOM = await photographerModel.getUserAllLikeDOM();
+  const photographerModel = photographerFactory(photographer)
+  const userPriceDOM = await photographerModel.getUserAllLikeDOM()
 
-    const imglikes = document.createElement('img');
-    imglikes.src = "./assets/icons/heart-solid.svg";
-    imglikes.alt = "coeur";
+  const imglikes = document.createElement('img')
+  imglikes.src = './assets/icons/heart-solid.svg'
+  imglikes.alt = 'coeur'
 
-    encartAllLike.appendChild(userPriceDOM);
-    encartAllLike.appendChild(imglikes);
+  encartAllLike.appendChild(userPriceDOM)
+  encartAllLike.appendChild(imglikes)
 }
 
-function triButton(e) {
+function triButton (e) {
+  const mediaDisplay = document.querySelector('.photograph-media_display')
+  mediaDisplay.innerHTML = ''
 
-    const mediaDisplay = document.querySelector(".photograph-media_display");
-    mediaDisplay.innerHTML = "";
+  const selectedValue = e.target.value
 
-    const selectedValue = e.target.value;
+  switch (selectedValue) {
+    case 'popular':
+      triButtonByPopularite()
+      break
 
-    switch (selectedValue) {
-        case "popular":
-            triButtonByPopularite();
-            break;
+    case 'date':
+      triButtonByDate()
+      break
 
-        case "date":
-            triButtonByDate();
-            break;
+    case 'title':
+      triButtonByTitre()
+      break
 
-        case "title":
-            triButtonByTitre();
-            break;
+    default: break
+  }
+}
 
-            defaut: break;
+async function triButtonByPopularite () {
+  const id = getUserId()
+
+  const images = await getMediaById(id, 'image')
+  const videos = await getMediaById(id, 'video')
+  const medias = images.concat(videos)
+
+  medias.sort(function (a, b) { return a.likes - b.likes })
+
+  displayTriButton(medias)
+}
+
+async function triButtonByDate () {
+  const id = getUserId()
+
+  const images = await getMediaById(id, 'image')
+  const videos = await getMediaById(id, 'video')
+  const medias = images.concat(videos)
+
+  medias.sort(function (a, b) { return a.date - b.date })
+
+  displayTriButton(medias)
+}
+
+async function triButtonByTitre () {
+  const id = getUserId()
+
+  const images = await getMediaById(id, 'image')
+  const videos = await getMediaById(id, 'video')
+  const medias = images.concat(videos)
+
+  medias.sort(function (a, b) {
+    if (a.title < b.title) {
+      return -1
     }
-}
-
-async function triButtonByPopularite() {
-
-    const id = getUserId();
-
-    const images = await getMediaById(id, "image");
-    const videos = await getMediaById(id, "video");
-    const medias = images.concat(videos);
-
-    medias.sort(function (a, b) { return a.likes - b.likes });
-
-    displayTriButton(medias);
-}
-
-async function triButtonByDate() {
-
-    const id = getUserId();
-
-    const images = await getMediaById(id, "image");
-    const videos = await getMediaById(id, "video");
-    const medias = images.concat(videos);
-
-    medias.sort(function (a, b) { return a.date - b.date });
-
-    displayTriButton(medias);
-}
-
-async function triButtonByTitre() {
-
-    const id = getUserId();
-
-    const images = await getMediaById(id, "image");
-    const videos = await getMediaById(id, "video");
-    const medias = images.concat(videos);
-
-
-    medias.sort(function (a, b) {
-        if (a.title < b.title) {
-            return -1;
-        }
-        if (a.title > b.title) {
-            return 1;
-        }
-        return 0;
-    });
-
-    displayTriButton(medias);
-}
-
-function displayTriButton(medias) {
-
-    const videos = [];
-    medias.forEach((media, index) => {
-        if (media.hasOwnProperty("video")) {
-            videos.push(media);
-            medias.splice(index, 1);
-        }
-    });
-
-    displayMedia(medias, "image");
-    displayMedia(videos, "video");
-
-    const eventListenerAddLike = document.querySelectorAll(".photograph-media_display_addLike");
-
-    eventListenerAddLike.forEach((element) => {
-        element.addEventListener("click", addLike);
-    });
-}
-
-function addLike(element) {
-
-    if (element.currentTarget.classList.contains("liked")) {
-        element.currentTarget.classList.remove("liked");
-        const p = element.currentTarget.querySelector("p");
-        let pNumber = parseInt(p.innerHTML);
-        pNumber = pNumber - 1;
-        p.innerHTML = pNumber.toString();
-
-        const pEncartLike = document.querySelector(".photograph-encart_likes > p");
-        let pNumberEncartLike = parseInt(pEncartLike.innerHTML);
-        pNumberEncartLike = pNumberEncartLike - 1;
-        pEncartLike.innerHTML = pNumberEncartLike.toString();
+    if (a.title > b.title) {
+      return 1
     }
-    else {
-        const p = element.currentTarget.querySelector("p");
-        let pNumber = parseInt(p.innerHTML);
-        pNumber = pNumber + 1;
-        p.innerHTML = pNumber.toString();
-        element.currentTarget.classList.add("liked");
+    return 0
+  })
 
-        const pEncartLike = document.querySelector(".photograph-encart_likes > p");
-        let pNumberEncartLike = parseInt(pEncartLike.innerHTML);
-        pNumberEncartLike = pNumberEncartLike + 1;
-        pEncartLike.innerHTML = pNumberEncartLike.toString();
+  displayTriButton(medias)
+}
+
+function displayTriButton (medias) {
+  const videos = []
+  medias.forEach((media, index) => {
+    // eslint-disable-next-line no-prototype-builtins
+    if (media.hasOwnProperty('video')) {
+      videos.push(media)
+      medias.splice(index, 1)
     }
+  })
+
+  displayMedia(medias, 'image')
+  displayMedia(videos, 'video')
+
+  const eventListenerAddLike = document.querySelectorAll('.photograph-media_display_addLike')
+
+  eventListenerAddLike.forEach((element) => {
+    element.addEventListener('click', addLike)
+  })
 }
 
-function getUserId() {
+function addLike (element) {
+  if (element.currentTarget.classList.contains('liked')) {
+    element.currentTarget.classList.remove('liked')
+    const p = element.currentTarget.querySelector('p')
+    let pNumber = parseInt(p.innerHTML)
+    pNumber = pNumber - 1
+    p.innerHTML = pNumber.toString()
 
-    let params = (new URL(document.location)).searchParams;
-    let id = parseInt(params.get('id'));
+    const pEncartLike = document.querySelector('.photograph-encart_likes > p')
+    let pNumberEncartLike = parseInt(pEncartLike.innerHTML)
+    pNumberEncartLike = pNumberEncartLike - 1
+    pEncartLike.innerHTML = pNumberEncartLike.toString()
+  } else {
+    const p = element.currentTarget.querySelector('p')
+    let pNumber = parseInt(p.innerHTML)
+    pNumber = pNumber + 1
+    p.innerHTML = pNumber.toString()
+    element.currentTarget.classList.add('liked')
 
-    return id;
+    const pEncartLike = document.querySelector('.photograph-encart_likes > p')
+    let pNumberEncartLike = parseInt(pEncartLike.innerHTML)
+    pNumberEncartLike = pNumberEncartLike + 1
+    pEncartLike.innerHTML = pNumberEncartLike.toString()
+  }
 }
 
-async function init() {
+function getUserId () {
+  const params = (new URL(document.location)).searchParams
+  const id = parseInt(params.get('id'))
 
-    const id = getUserId();
+  return id
+}
 
-    const photographer = await getPhotographerById(id);
-    displayData(photographer);
+async function initPhotographer () {
+  const id = getUserId()
 
-    displayPrice(photographer);
-    displayAllLike(photographer);
+  const photographer = await getPhotographerById(id)
+  displayData(photographer)
 
-    const mediasPicture = await getMediaById(id, "image");
-    const mediasVideo = await getMediaById(id, "video");
-    displayMedia(mediasPicture, "image");
-    displayMedia(mediasVideo, "video");
+  displayPrice(photographer)
+  displayAllLike(photographer)
 
-    const elementSelect = document.getElementById("select").addEventListener("change", triButton, false);
+  const mediasPicture = await getMediaById(id, 'image')
+  const mediasVideo = await getMediaById(id, 'video')
+  displayMedia(mediasPicture, 'image')
+  displayMedia(mediasVideo, 'video')
 
-    const eventListenerAddLike = document.querySelectorAll(".photograph-media_display_addLike");
+  document.getElementById('select').addEventListener('change', triButton, false)
 
-    eventListenerAddLike.forEach((element) => {
-        element.addEventListener("click", addLike);
-    });
+  const eventListenerAddLike = document.querySelectorAll('.photograph-media_display_addLike')
+
+  eventListenerAddLike.forEach((element) => {
+    element.addEventListener('click', addLike)
+  })
 };
 
-init();
+initPhotographer()

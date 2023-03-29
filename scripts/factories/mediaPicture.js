@@ -1,60 +1,68 @@
-export function mediaPicture(data) {
-    // en gros la il faut gerer le constructeur quand c'est une image ou une vidéo
-    
-    const { id, photographerId, title, image, likes, date, price } = data;
+export function mediaPicture (data) {
+  // en gros la il faut gerer le constructeur quand c'est une image ou une vidéo
 
-    const picture = `assets/sample photos/${image}`;
+  const { id, photographerId, title, image, likes, date, price } = data
 
-    function getMediaDOM() {
-        // ne pas oublier les alt et aria-label
-        const div = document.createElement( 'div' );
+  const picture = `assets/sample photos/${image}`
 
-        const img = getMediaPictureDOM();
+  function getMediaDOM () {
+    // ne pas oublier les alt et aria-label
+    const div = document.createElement('div')
 
-        const divTitre = document.createElement( 'div' );
-        
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = title;
-        
-        const pLikes = getMediaLikeDOM();
-        
-        div.appendChild(img);
-        div.appendChild(divTitre);
-        divTitre.appendChild(h2);
-        divTitre.appendChild(pLikes);
+    const img = getMediaPictureDOM()
 
-        return (div);
-    }
+    const divTitre = document.createElement('div')
 
-    function getMediaPictureDOM() {
-        // ne pas oublier les alt et aria-label
-        
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        img.setAttribute("alt", title)
+    const h2 = document.createElement('h2')
+    h2.textContent = title
 
-        return (img);
-    }
+    const pLikes = getMediaLikeDOM()
 
-    function getMediaLikeDOM() {
-        
-        const divlikes = document.createElement( 'div' );
-        divlikes.className = "photograph-media_display_addLike";
+    div.appendChild(img)
+    div.appendChild(divTitre)
+    divTitre.appendChild(h2)
+    divTitre.appendChild(pLikes)
 
-        const plikes = document.createElement( 'p' );
-        plikes.textContent = likes;
+    return (div)
+  }
 
-        const imglikes = document.createElement( 'img' );
-        imglikes.src = "./assets/icons/heart-solid.svg";
-        imglikes.alt = "coeur";
+  function getMediaPictureDOM () {
+    // ne pas oublier les alt et aria-label
 
-        divlikes.appendChild(plikes);
-        divlikes.appendChild(imglikes);
-        
-        return (divlikes);
-    }
+    const img = document.createElement('img')
+    img.setAttribute('src', picture)
+    img.setAttribute('alt', title + ', closeup view')
 
+    return (img)
+  }
 
-    return { id, photographerId, title, image, likes, date, price, 
-        getMediaDOM, getMediaPictureDOM, getMediaLikeDOM }
+  function getMediaLikeDOM () {
+    const divlikes = document.createElement('div')
+    divlikes.className = 'photograph-media_display_addLike'
+
+    const plikes = document.createElement('p')
+    plikes.textContent = likes
+
+    const imglikes = document.createElement('img')
+    imglikes.src = './assets/icons/heart-solid.svg'
+    imglikes.alt = 'likes'
+
+    divlikes.appendChild(plikes)
+    divlikes.appendChild(imglikes)
+
+    return (divlikes)
+  }
+
+  return {
+    id,
+    photographerId,
+    title,
+    image,
+    likes,
+    date,
+    price,
+    getMediaDOM,
+    getMediaPictureDOM,
+    getMediaLikeDOM
+  }
 }
