@@ -12,7 +12,15 @@ export function displayLightBoxModal (e) {
   lightBoxMedia.appendChild(lightBoxMediaTitreDom)
 
   document.querySelector('.lightbox_modal_img').addEventListener('click', closeLightBoxModal)
-
+  document.addEventListener(
+    'keydown',
+    (event) => {
+      if (event.key === 'Escape' && modal.style.display === 'block') {
+        closeLightBoxModal()
+      }
+    },
+    true
+  )
   eventListenerChevron(mediaTitle)
 }
 
@@ -63,6 +71,20 @@ function eventListenerChevron (title) {
       this.removeEventListener('click', handlerFirst)
       console.log('passéfirst')
     })
+
+    document.addEventListener(
+      'keydown',
+      function handlerFirstKey (event) {
+        switch (event.key) {
+          case 'ArrowRight': rightChevron.click()
+            console.log('passéfirst touche')
+            this.removeEventListener('keydown', handlerFirstKey, true)
+            // Right pressed
+            break
+        }
+      },
+      true
+    )
   } else if (indexMedia === medias.length - 1) {
     rightChevron.classList.add('displaynone')
     leftChevron.addEventListener('click', function handlerLast () {
@@ -72,6 +94,20 @@ function eventListenerChevron (title) {
       this.removeEventListener('click', handlerLast)
       console.log('passélast')
     })
+
+    document.addEventListener(
+      'keydown',
+      function handlerLasttKey (event) {
+        switch (event.key) {
+          case 'ArrowLeft': leftChevron.click()
+            console.log('passélast touche')
+            this.removeEventListener('keydown', handlerLasttKey, true)
+            // Left pressed
+            break
+        }
+      },
+      true
+    )
   } else {
     rightChevron.addEventListener('click', function handlerRight () {
       document.querySelector('.lightbox-media').innerHTML = ''
@@ -89,5 +125,24 @@ function eventListenerChevron (title) {
       displayLightBoxMedia(medias[indexMedia - 1])
       console.log('passéleft')
     })
+
+    document.addEventListener(
+      'keydown',
+      function hanflerLeftAndRightKey (event) {
+        switch (event.key) {
+          case 'ArrowLeft': leftChevron.click()
+            console.log('passéleft touche')
+            this.removeEventListener('keydown', hanflerLeftAndRightKey, true)
+            // Left pressed
+            break
+          case 'ArrowRight': rightChevron.click()
+            console.log('passéright touche')
+            this.removeEventListener('keydown', hanflerLeftAndRightKey, true)
+            // Right pressed
+            break
+        }
+      },
+      true
+    )
   }
 }
