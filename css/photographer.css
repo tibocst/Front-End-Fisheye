@@ -187,7 +187,7 @@ form textarea:focus {
 
 .photograph-media_display {
     display: flex;
-    justify-content: space-between;
+    column-gap: 50px;
     row-gap: 20px;
     flex-wrap: wrap;
     width: 100%;
@@ -247,9 +247,11 @@ form textarea:focus {
     right: 20px;
     bottom: 0;
     background-color: #D3573C;
-    width: 500px;
+    max-width: 300px;
     height: 40px;
     display: flex;
+    gap: 80px;
+    padding: 0 40px;
     justify-content: space-around;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -301,7 +303,9 @@ form textarea:focus {
 
 .lightbox_modal > .modal {
     background-color: white;
-
+    width: 1400px;
+    height: inherit;
+    margin: 60px auto auto;
 }
 
 .lightbox_modal_img {
@@ -316,7 +320,6 @@ form textarea:focus {
 .modal-media {
     display: flex;
     align-items: center;
-    flex: 1;
     position: relative;
 }
 
