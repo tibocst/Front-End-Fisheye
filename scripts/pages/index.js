@@ -1,11 +1,4 @@
-import { photographerFactory } from '../factories/photographer.js'
-
-export async function getPhotographers () {
-  const result = await fetch('./data/photographers.json')
-  const photographers = await result.json()
-
-  return photographers.photographers
-}
+import { photographerFactory, getPhotographers } from '../factories/photographer.js'
 
 async function displayData (photographers) {
   const photographersSection = document.querySelector('.photographer_section')

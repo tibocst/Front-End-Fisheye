@@ -1,4 +1,4 @@
-import { getMediaById } from '../pages/photographer.js'
+import { getMediaById } from '../factories/mediaFactory.js'
 
 export function photographerFactory (data) {
   const { name, id, city, country, tagline, price, portrait } = data
@@ -112,4 +112,11 @@ export function photographerFactory (data) {
     getUserAllLikeDOM,
     getUserNameDOM
   }
+}
+
+export async function getPhotographers () {
+  const result = await fetch('./data/photographers.json')
+  const photographers = await result.json()
+
+  return photographers.photographers
 }

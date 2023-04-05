@@ -1,6 +1,5 @@
-import { photographerFactory } from '../factories/photographer.js'
-import { mediaFactory } from '../factories/mediaFactory.js'
-import { getPhotographers } from './index.js'
+import { photographerFactory, getPhotographers } from '../factories/photographer.js'
+import { mediaFactory, getMediaById } from '../factories/mediaFactory.js'
 import { displayLightBoxModal } from '../utils/lightBoxModal.js'
 
 async function getPhotographerById (id) {
@@ -12,27 +11,6 @@ async function getPhotographerById (id) {
     }
   }
   return false
-}
-
-export async function getMediaById (id, type) {
-  try {
-    const result = await fetch('../../data/photographers.json')
-    const resultJson = await result.json()
-    const medias = resultJson.media
-    const mediasTab = []
-
-    for (let i = 0; i < medias.length; i++) {
-      if (medias[i].photographerId === id) {
-        // eslint-disable-next-line no-prototype-builtins
-        if (medias[i].hasOwnProperty(type)) {
-          mediasTab.push(medias[i])
-        }
-      }
-    }
-    return mediasTab
-  } catch (error) {
-    console.log(error)
-  }
 }
 
 async function displayData (photographer) {
