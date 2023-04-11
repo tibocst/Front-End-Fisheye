@@ -209,6 +209,6 @@ async function initPhotographer () {
   eventListenerAddLike.forEach((element) => {
     element.addEventListener('click', addLike)
   })
-};
+}
 
 initPhotographer()
