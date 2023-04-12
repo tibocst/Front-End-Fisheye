@@ -1,5 +1,6 @@
 import { photographerFactory, getPhotographers } from '../factories/photographer.js'
 
+// affiche les profils des photographes
 async function displayData (photographers) {
   const photographersSection = document.querySelector('.photographer_section')
 
@@ -12,7 +13,6 @@ async function displayData (photographers) {
 };
 
 async function init () {
-  // Récupère les datas des photographes
   const photographers = await getPhotographers()
 
   displayData(photographers)

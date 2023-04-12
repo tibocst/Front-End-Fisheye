@@ -1,12 +1,9 @@
 export function mediaVideo (data) {
-  // en gros la il faut gerer le constructeur quand c'est une image ou une vidéo
-
   const { id, photographerId, title, video, likes, date, price } = data
 
   const videoPath = `assets/sample photos/${video}`
 
   function getMediaDOM () {
-    // ne pas oublier les alt et aria-label
     const div = document.createElement('div')
 
     const video = getMediaVideoDOM()
@@ -27,8 +24,6 @@ export function mediaVideo (data) {
   }
 
   function getMediaVideoDOM () {
-    // ne pas oublier les alt et aria-label
-
     const video = document.createElement('video')
     const source = document.createElement('source')
 

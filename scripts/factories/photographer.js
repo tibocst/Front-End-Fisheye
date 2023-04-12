@@ -4,9 +4,8 @@ export function photographerFactory (data) {
   const { name, id, city, country, tagline, price, portrait } = data
 
   const picture = `assets/photographers/${portrait}`
-
+  // crée l'élément DOM profil d'un photographe
   function getUserCardDOM () {
-    // ne pas oublier les alt et aria-label
     const article = document.createElement('article')
     const a = document.createElement('a')
     a.href = 'photographer.html?id=' + id
@@ -32,8 +31,6 @@ export function photographerFactory (data) {
   }
 
   function getUserNameDOM () {
-    // ne pas oublier les alt et aria-label
-
     const h2 = document.createElement('h2')
     h2.textContent = name
 
@@ -41,8 +38,6 @@ export function photographerFactory (data) {
   }
 
   function getUserPictureDOM () {
-    // ne pas oublier les alt et aria-label
-
     const img = document.createElement('img')
     img.setAttribute('src', picture)
     img.setAttribute('alt', tagline)
@@ -52,7 +47,6 @@ export function photographerFactory (data) {
   }
 
   function getUserInfoDOM () {
-    // ne pas oublier les alt et aria-label
     const div = document.createElement('div')
 
     const h2 = document.createElement('h2')

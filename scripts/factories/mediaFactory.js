@@ -1,6 +1,7 @@
 import { mediaPicture } from './mediaPicture.js'
 import { mediaVideo } from './mediaVideo.js'
 
+// redirige vers la bonne factory en fonction du type de media souhaité
 export function mediaFactory (data, type) {
   if (type === 'image') {
     return mediaPicture(data)

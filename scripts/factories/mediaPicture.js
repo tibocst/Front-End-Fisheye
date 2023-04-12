@@ -1,12 +1,9 @@
 export function mediaPicture (data) {
-  // en gros la il faut gerer le constructeur quand c'est une image ou une vidéo
-
   const { id, photographerId, title, image, likes, date, price } = data
 
   const picture = `assets/sample photos/${image}`
 
   function getMediaDOM () {
-    // ne pas oublier les alt et aria-label
     const div = document.createElement('div')
 
     const img = getMediaPictureDOM()
@@ -27,8 +24,6 @@ export function mediaPicture (data) {
   }
 
   function getMediaPictureDOM () {
-    // ne pas oublier les alt et aria-label
-
     const img = document.createElement('img')
     img.setAttribute('src', picture)
     img.setAttribute('alt', title + ', closeup view')

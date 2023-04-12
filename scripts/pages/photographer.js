@@ -13,6 +13,7 @@ async function getPhotographerById (id) {
   return false
 }
 
+// affiche le profil du photographe
 async function displayData (photographer) {
   const photographersSection = document.querySelector('.photograph-header')
   const modal = document.getElementById('contact_modal')
@@ -29,6 +30,7 @@ async function displayData (photographer) {
   modalFormH2.innerText = modalFormH2.innerText + ' ' + nameInfoDOM.innerHTML
 };
 
+// affiche les medias du photographe
 async function displayMedia (medias, type) {
   const mediaDisplay = document.querySelector('.photograph-media_display')
 
@@ -94,6 +96,7 @@ function triButton (e) {
 async function triButtonByPopularite () {
   const id = getUserId()
 
+  // récupère les images et videos puis les concatènes pour les trier
   const images = await getMediaById(id, 'image')
   const videos = await getMediaById(id, 'video')
   const medias = images.concat(videos)
@@ -122,6 +125,7 @@ async function triButtonByTitre () {
   const videos = await getMediaById(id, 'video')
   const medias = images.concat(videos)
 
+  // une autre méthode de tri que les précédentes
   medias.sort(function (a, b) {
     if (a.title < b.title) {
       return -1
@@ -182,6 +186,8 @@ function addLike (element) {
 }
 
 function getUserId () {
+  // va chercher l'id contenu dans l'url
+  // passé par le clic sur les photographes sur la page index
   const params = (new URL(document.location)).searchParams
   const id = parseInt(params.get('id'))
 
