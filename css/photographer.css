@@ -165,22 +165,67 @@ form textarea:focus {
     position: relative;
 }
 
-.photograph-media_tri_button {
+.menu-button-actions {
     display: flex;
-    flex-direction: column ;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.menu-button-actions > button {
+    display: flex;
     font-size: 1em;
     color: white;
-    width: 120px;
+    width: 130px;
     background-color: #901C1C;
     border-radius: 5px;
     border: inherit;
     cursor: pointer;
     align-self: center;
-    padding: 10px 10px;
+    padding: 15px 15px 15px 10px;
+    margin: auto;
+    justify-content: space-between;
 }
 
-.tri-button_visible {
-    display: flex;
+.menu-button-actions > button > img {
+    align-self: center;
+    width: 10px;
+    filter: invert(100%) sepia(0%) saturate(7486%) hue-rotate(5deg) brightness(104%) contrast(105%);
+}
+
+#menu1 {
+    display: none;
+    flex-direction: column;
+    font-size: 1em;
+    color: white;
+    width: 130px;
+    background-color: #901C1C;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: inherit;
+    cursor: pointer;
+    align-self: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 51px;
+}
+
+#menu1 > li {
+    padding: 10px 0px;
+    padding-left: 5px;
+    border-top: 1px solid white;
+    width: 110px;
+    margin: auto;
+}
+
+.rotate {
+    rotate: 90deg;
+}
+
+.rotated {
+    rotate: 270deg;
 }
 
 /* css des photos/vidéos et le texte en lien */
@@ -372,3 +417,6 @@ form textarea:focus {
 .displaynone {
     display: none;
 }
+
+
+

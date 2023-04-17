@@ -70,31 +70,12 @@ async function displayAllLike (photographer) {
   encartAllLike.appendChild(imglikes)
 }
 
-function triButton (e) {
-  const mediaDisplay = document.querySelector('.photograph-media_display')
-  mediaDisplay.innerHTML = ''
-
-  const selectedValue = e.target.value
-
-  switch (selectedValue) {
-    case 'popular':
-      triButtonByPopularite()
-      break
-
-    case 'date':
-      triButtonByDate()
-      break
-
-    case 'title':
-      triButtonByTitre()
-      break
-
-    default: break
-  }
-}
-
 async function triButtonByPopularite () {
   const id = getUserId()
+  const menubutton1 = document.getElementById('menubutton1')
+  const img = document.querySelector('.menu-button-actions > button > img').cloneNode(true)
+  menubutton1.innerText = 'Popularité'
+  menubutton1.appendChild(img)
 
   // récupère les images et videos puis les concatènes pour les trier
   const images = await getMediaById(id, 'image')
@@ -108,6 +89,10 @@ async function triButtonByPopularite () {
 
 async function triButtonByDate () {
   const id = getUserId()
+  const menubutton1 = document.getElementById('menubutton1')
+  const img = document.querySelector('.menu-button-actions > button > img').cloneNode(true)
+  menubutton1.innerText = 'Date'
+  menubutton1.appendChild(img)
 
   const images = await getMediaById(id, 'image')
   const videos = await getMediaById(id, 'video')
@@ -120,6 +105,10 @@ async function triButtonByDate () {
 
 async function triButtonByTitre () {
   const id = getUserId()
+  const menubutton1 = document.getElementById('menubutton1')
+  const img = document.querySelector('.menu-button-actions > button > img').cloneNode(true)
+  menubutton1.innerText = 'Titre'
+  menubutton1.appendChild(img)
 
   const images = await getMediaById(id, 'image')
   const videos = await getMediaById(id, 'video')
@@ -196,7 +185,7 @@ function getUserId () {
 
 async function initPhotographer () {
   const id = getUserId()
-
+  const mediaDisplay = document.querySelector('.photograph-media_display')
   const photographer = await getPhotographerById(id)
   displayData(photographer)
 
@@ -205,18 +194,68 @@ async function initPhotographer () {
 
   triButtonByPopularite()
 
-  // const mediasPicture = await getMediaById(id, 'image')
-  // const mediasVideo = await getMediaById(id, 'video')
-  // displayMedia(mediasPicture, 'image')
-  // displayMedia(mediasVideo, 'video')
-
-  document.getElementById('select').addEventListener('change', triButton, false)
-
   const eventListenerAddLike = document.querySelectorAll('.photograph-media_display_addLike')
 
   eventListenerAddLike.forEach((element) => {
     element.addEventListener('click', addLike)
   })
+
+  const menu1 = document.getElementById('menu1')
+  const menubutton1 = document.getElementById('menubutton1')
+  const menu1Popularite = document.getElementById('popularite')
+  const menu1Date = document.getElementById('date')
+  const menu1Titre = document.getElementById('titre')
+
+  document.getElementById('menubutton1').addEventListener('click', () => {
+    if (menu1.style.display === 'flex') {
+      menu1.style.display = 'none'
+      menubutton1.style.borderRadius = '5px'
+      document.querySelector('#menubutton1 > img').classList.remove('rotated')
+    } else {
+      menu1.style.display = 'flex'
+      document.querySelector('#menubutton1 > img').classList.add('rotated')
+      menubutton1.style.borderRadius = 'inherit'
+      menubutton1.style.borderTopLeftRadius = '5px'
+      menubutton1.style.borderTopRightRadius = '5px'
+    }
+
+    menu1Popularite.style.display = 'flex'
+    menu1Date.style.display = 'flex'
+    menu1Titre.style.display = 'flex'
+    if (menubutton1.innerHTML.toLowerCase().includes('popularité')) {
+      menu1Popularite.style.display = 'none'
+    } else if (menubutton1.innerHTML.toLowerCase().includes('titre')) {
+      menu1Titre.style.display = 'none'
+    } else if (menubutton1.innerHTML.toLowerCase().includes('date')) {
+      menu1Date.style.display = 'none'
+    }
+  })
+
+  menu1Popularite.addEventListener('click', () => {
+    mediaDisplay.innerHTML = ''
+    menu1.style.display = 'none'
+    menubutton1.style.borderRadius = '5px'
+    triButtonByPopularite()
+    document.querySelector('#menubutton1 > img').classList.remove('rotated')
+  })
+
+  menu1Date.addEventListener('click', () => {
+    mediaDisplay.innerHTML = ''
+    menu1.style.display = 'none'
+    menubutton1.style.borderRadius = '5px'
+    triButtonByDate()
+    document.querySelector('#menubutton1 > img').classList.remove('rotated')
+  })
+
+  menu1Titre.addEventListener('click', () => {
+    mediaDisplay.innerHTML = ''
+    menu1.style.display = 'none'
+    menubutton1.style.borderRadius = '5px'
+    triButtonByTitre()
+    document.querySelector('#menubutton1 > img').classList.remove('rotated')
+  })
+
+  menu1Popularite.style.display = 'none'
 }
 
 initPhotographer()

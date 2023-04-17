@@ -27,12 +27,18 @@
       <div class="photograph-media_tri">
         <p>Trier par</p>
 
-        <select id="select" class="photograph-media_tri_button" aria-label="Order By">
-          <option value="popular" aria-labelledby="select">Popularité</option>
-          <option value="date" aria-labelledby="select">Date</option>
-          <option value="title" aria-labelledby="select">Titre</option>
-        </select>
-
+        <div class="menu-button-actions">
+          <button type="button" id="menubutton1" aria-haspopup="true" aria-controls="menu1">
+            Popularité
+            <img src="./assets/icons/chevron.svg" alt="chevron" class = "rotate">
+          </button>
+        
+          <ul id="menu1" role="menu" aria-labelledby="menubutton1">
+            <li id = "popularite" role="menuitem" tabindex="0">Popularité</li>
+            <li id = "date" role="menuitem" tabindex="0">Date</li>
+            <li id = "titre" role="menuitem" tabindex="0">Titre</li>
+          </ul>
+        </div>
       </div>
 
       <div class="photograph-media_display"></div>
