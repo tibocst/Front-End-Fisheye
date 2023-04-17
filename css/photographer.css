@@ -191,6 +191,7 @@ form textarea:focus {
     row-gap: 20px;
     flex-wrap: wrap;
     width: 100%;
+    justify-content: center;
 }
 
 .photograph-media_display > div {

@@ -12,6 +12,8 @@ export function displayLightBoxModal (e) {
   lightBoxMedia.appendChild(lightBoxMediaDom)
   lightBoxMedia.appendChild(lightBoxMediaTitreDom)
 
+  const firstFocusableElement = document.querySelector('.lightbox_modal_img')
+  firstFocusableElement.focus()
   hideChevron()
 }
 
@@ -115,6 +117,26 @@ function initLightBox () {
     },
     true
   )
+
+  document.addEventListener('keydown', function (e) {
+    const modal = document.querySelector('.lightbox_modal')
+    if (e.key === 'Tab' && modal.style.display === 'block') {
+      const firstFocusableElement = document.querySelector('.lightbox_modal_img')
+      const lastFocusableElement = rightChevron
+      console.log('passé')
+      if (rightChevron.classList.contains('displaynone')) {
+        console.log('passé')
+        if (leftChevron === document.activeElement) {
+          e.preventDefault()
+          firstFocusableElement.focus()
+        }
+      }
+      if (lastFocusableElement === document.activeElement) {
+        e.preventDefault()
+        firstFocusableElement.focus()
+      }
+    }
+  })
 }
 
 initLightBox()

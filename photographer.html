@@ -46,13 +46,13 @@
       </div>
     </div>
   </main>
-  <div id="contact_modal">
-    <div class="modal">
+  <div id="contact_modal" tabindex="-1" role="dialog">
+    <div class="modal contact_modal" tabindex="0">
       <header>
         <div>
           <h2>Contactez-moi</h2>
         </div>
-        <img src="./assets/icons/close.svg" onclick="closeModal()" class="contact_modal_img" alt="icone de croix" aria-label="Close Contact form">
+        <img src="./assets/icons/close.svg" tabindex="0" onclick="closeModal()" class="contact_modal_img" alt="icone de croix" aria-label="Close Contact form">
       </header>
       <form id="contactForm" onsubmit="return submitedContactForm(event)">
         <div>
@@ -70,10 +70,10 @@
     </div>
   </div>
 
-  <div class="lightbox_modal">
-    <div class="modal">
+  <div class="lightbox_modal" tabindex="-1" role="dialog">
+    <div class="modal" tabindex="0">
       <div class="modal-media" aria-label="image closeup view">
-        <img src="./assets/icons/close.svg" class="lightbox_modal_img" alt="icone de croix" aria-label="close dialog">
+        <img src="./assets/icons/close.svg" tabindex="0" class="lightbox_modal_img" alt="icone de croix" aria-label="close dialog">
         <div class="left-chevron" aria-label="previous image">
           <img src="./assets/icons/chevron.svg" alt="chevron gauche" tabindex="0">
         </div>

@@ -1,8 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 function displayModal () {
   const modal = document.getElementById('contact_modal')
-
   modal.style.display = 'block'
+  const firstFocusableElement = document.querySelector('.contact_modal_img')
+  console.log(firstFocusableElement)
+  firstFocusableElement.focus()
 
   document.addEventListener(
     'keydown',
@@ -33,3 +35,15 @@ function submitedContactForm (event) {
   closeModal()
   return false
 }
+
+document.addEventListener('keydown', function (e) {
+  const modal = document.getElementById('contact_modal')
+  if (e.key === 'Tab' && modal.style.display === 'block') {
+    const firstFocusableElement = document.querySelector('.contact_modal_img')
+    const lastFocusableElement = document.querySelector('.contact_modal > form > input')
+    if (lastFocusableElement === document.activeElement) {
+      e.preventDefault()
+      firstFocusableElement.focus()
+    }
+  }
+})
