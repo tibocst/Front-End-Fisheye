@@ -203,10 +203,12 @@ async function initPhotographer () {
   displayPrice(photographer)
   displayAllLike(photographer)
 
-  const mediasPicture = await getMediaById(id, 'image')
-  const mediasVideo = await getMediaById(id, 'video')
-  displayMedia(mediasPicture, 'image')
-  displayMedia(mediasVideo, 'video')
+  triButtonByPopularite()
+
+  // const mediasPicture = await getMediaById(id, 'image')
+  // const mediasVideo = await getMediaById(id, 'video')
+  // displayMedia(mediasPicture, 'image')
+  // displayMedia(mediasVideo, 'video')
 
   document.getElementById('select').addEventListener('change', triButton, false)
 
