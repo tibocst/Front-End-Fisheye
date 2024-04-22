@@ -14,8 +14,9 @@ export function mediaFactory (data, type) {
 
 export async function getMediaById (id, type) {
   try {
-    const result = await fetch('../../data/photographers.json')
+    const result = await fetch('https://tibocst.github.io/Front-End-Fisheye/data/photographers.json')
     const resultJson = await result.json()
+    console.log(resultJson)
     const medias = resultJson.media
     const mediasTab = []
 
